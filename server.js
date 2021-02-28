@@ -25,10 +25,12 @@ app.get('/searches/new',(req,res)=>{
 });
 app.post('/searches',handelSearches);
 
+
 app.get('*', (req,res)=>{
     res.render('pages/error'); 
 
 });
+
 
 
 
@@ -37,6 +39,7 @@ function handelSearches(req,res) {
 
     const url =`https://www.googleapis.com/books/v1/volumes?q=${req.body.select}+${req.body.input}`
 // const url =`https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor`
+
 
 console.log(req.body);
 superagent.get(url).then(data =>{
@@ -50,6 +53,7 @@ res.render('pages/searches/show',{books:newBook})
 }).catch(error => {
     res.render('/pages/error');
 
+
 });
 }
 function Book(data) {
@@ -59,10 +63,9 @@ function Book(data) {
     this.decr=data.volumeInfo.description? data.volumeInfo.description:"No description available";   
 }
 
-let message = "SORRY YOU HAVE DO A MISTAKE"
-app.get('*', (req, res) => {
-    res.status(404).render('/pages/error', { 'message': message })
-});
+
+
+
 app.listen(PORT, ()=>{
     console.log('server is listinig to '+ PORT);
 });
