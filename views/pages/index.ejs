@@ -9,34 +9,42 @@
     <link rel="stylesheet" href="styles/style.css"> 
 
 </head>
+
 <body>
 
     <header>
+        <a href="/searches/new">Search Books by Title or Author</a>
         BOOKS!
     </header>
     <h1 class="headerText"> Search by Title or Author</h1>
     
     <main>
-        <ul>
-            <%let conut=0%>
-            <% booksList.forEach(book => { %>
-                <li>
-                    <%++conut%>
-                        <img src=<%= book.image_url%>>
-                        <h2 class="title"><%= book.title%></h2>
-                        <h3 class="author"><%= book.author%></h3>
-                       <form action="/books/<%= book.id%>" method="GET">
-                        <button type="submit">View Details</button>
-                    </form>
-                </li>
-                <% }) %>
-                <h2>Number of Books = <%=conut%></h2>
-            <!-- <% booksList.forEach(book => { %>
-                <li>
-                    <a href="/show/<%= booksList.id %>"><%= booksList.title %></a>
-                </li>
-            <% })%> -->
-        </ul>
+        <section>
+            <ul>
+                <%let conut=0%>
+                <% booksList.forEach(book => { %>
+                    <li class="renderedList">
+                        <img src="<%= book.image %>"> 
+                        <h2><%=book.title %></h2>
+                        <h3><%=book.authors%></h3>
+                        <form action="/books/<%= book.id%>" method="GET">
+                            <button id="DetailsButton" type="submit">View Details</button>
+                        </form>
+                     </li>
+                    <!-- <li class="renderedList">
+                        <%++conut%>
+                            <img src=<%= book.image%>>
+                            <h2 class="title"><%= book.title%></h2>
+                            <h3 class="authors"><%= book.author%></h3>
+                           <form action="/books/<%= book.id%>" method="GET">
+                            <button id="DetailsButton" type="submit">View Details</button>
+                        </form>
+                    </li> -->
+                    <% }) %>
+                    <h2 id="seachButton">Number of Books = <%=conut%></h2>
+ 
+            </ul>
+        </section>
     </main>
 
 
