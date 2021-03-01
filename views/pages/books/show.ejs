@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <ul>
+
+            <% books.forEach(book => { %>
+                <li class="renderedList"> 
+                    <img src="<%= book.image %>" alt="">
+                    <h2><%= book.title%></h2>
+                    <h3><%= book.authors%></h3>
+                    <p><%= book.decr%></p>
+                    
+            </li>
+
+            <%})%>
+      
+        </ul> 
+        <!-- <form action="/new" method="post">
+            <label>
+                <label for="title">book title</label>
+                <input type="text" name="title" placeholder="Populated Title:" >
+                <label for="auther">Auther</label>
+                <input type="text" name="authors" placeholder="Populated Author:">
+                <label for="isbn">Populated ISBN</label>
+                <input type="text" name="isbn" placeholder="Populated ISBN:" >
+                <label for="image_url">image_url</label>
+                <input type="text" name="image" >
+                <label for="decr">description</label>
+                <textarea name="description" placeholder="Populated Description:">"<%= book.description%>"</textarea>
+                <label for="bookshelf">book shelf</label>
+                <input type="text" name="bookshelf" placeholder="Enter a Bookshelf Name:">
+                <div class="submit">
+                    <input type="submit" value="Add to Database"></input>
+                </div>
+            </label>
+        </form> -->
+    </main>
+</body>
+
+</html>
