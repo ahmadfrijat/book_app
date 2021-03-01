@@ -18,10 +18,11 @@ app.use(express.urlencoded({ extended: true }));
 // app.get('/',(req,res)=>{
 //     res.render('pages/index');
 // });
-// app.post('/new', addBookToDB);
+app.post('/new', addBookToDB);
 app.get('/', getAllBooks);
-app.post('/selsctedBook', addBookToDB);
+app.post('/edit', edaitSelected);
 app.get('/books/:book_id', getSpecificBook);
+
 
 
 app.get('/error', (req, res) => {
@@ -38,14 +39,18 @@ app.get('*', (req, res) => {
     res.render('pages/error');
 
 });
+
 function addBookToDB(req, res) {
     // console.log(req.body)
-    let { image_url, title, author, description, isbn, bookshelf } = req.body
-    let SQL = `INSERT INTO book (image_url, title, author, description, isbn, bookshelf) VALUES ($1, $2, $3, $4, $5, $6)`
-    let values = [image_url, title, author, description, isbn, bookshelf]
+    // let { image, title, authors, decr, isbn, bookshelf } = req.body
+   let SQL= `insert into books(image, title, authors, decr, isbn, bookshelf) VALUES ($1, $2, $3, $4, $5, $6)returning *;`;
+    // let SQL = `INSERT INTO books (image, title, authors, decr, isbn, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`
+    let reqBody = req.body;
+    let values = [reqBody.image, reqBody.title, reqBody.authors, reqBody.decr, reqBody.isbn, reqBody.bookshelf];
 
     client.query(SQL, values)
-        .then(() => {
+        .then((data) => {
+            console.log(data);
             res.redirect('/');
         }).catch(error => {
             res.render('/pages/error');
@@ -56,9 +61,10 @@ function addBookToDB(req, res) {
 
 
 function getAllBooks(req, res) {
-    let SQL = `SELECT * FROM book;`;
+    let SQL = `SELECT * FROM books;`;
     client.query(SQL)
         .then(data => {
+            // console.log(data.rows);
             res.render('pages/index', { booksList: data.rows });
         }).catch(error => {
             res.render('/pages/error');
@@ -68,14 +74,17 @@ function getAllBooks(req, res) {
 }
 
 
+
 function edaitSelected(req,res){
     // console.log(req.body)
     res.render('pages/books/show', {book:req.body})
+
+
 }
 
 
 function getSpecificBook(req,res){
-    let SQL = `SELECT * FROM book WHERE id=$1`;
+    let SQL = `SELECT * FROM books WHERE id=$1`;
     let id = req.params.book_id;
     let values =[id];
     client.query(SQL,values)

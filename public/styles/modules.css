@@ -65,7 +65,23 @@ footer ul li {
   padding-top: 1%;
   padding-bottom: 1%;
 }
-
+#DetailsButton{
+  width: 52%;
+  height: 5vh;
+  display: flex;
+  margin: auto;
+  margin-right: 60px;
+  background-color: rgba(0, 0, 0, 0.918);
+  color: rgba(248, 248, 238, 0.856);
+  margin-top: 2%;
+  border: 0;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-left: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
 
 
 .footer{

@@ -29,22 +29,14 @@
                 <h2><%= book.title%></h2>
                 <h3><%= book.authors%></h3>
                 <p><%= book.decr%></p>
-                <form action="/selsctedBook" method="post">
-                    <input type="text" name="image_url" value="<%= book.image%>">
-                    <input type="text" name="title" value="<%= book.title%>">
-                    <input type="text" name="author" value="<%= book.authors%>">
-                    <input type="text" name="description" value="<%= book.decr%>">
-                    <input type="text" name="isbn" value="<%= book.isbn%>">
-                    <button type="submit">Select this Book</button>
-                </form>
-                <!-- <form action="/edit" method="post">
-                    <input type="hidden" name="image_url" value="<%= book.image_url%>">
+                <form action="/edit" method="post">
+                    <input type="hidden" name="image" value="<%= book.image%>">
                     <input type="hidden" name="title" value="<%= book.title%>">
-                    <input type="hidden" name="author" value="<%= book.author%>">
-                    <input type="hidden" name="description" value="<%= book.description%>">
+                    <input type="hidden" name="authors" value="<%= book.authors%>">
+                    <input type="hidden" name="decr" value="<%= book.decr%>">
                     <input type="hidden" name="isbn" value="<%= book.isbn%>">
-                    <button type="submit">Select this Book</button>
-                </form> -->
+                    <button id="DetailsButton" type="submit">Select this Book</button>
+                </form>
 
             </li>
 
