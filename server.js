@@ -6,15 +6,16 @@ const cors = require('cors');
 const superagent = require('superagent');
 require('dotenv').config();
 const pg = require('pg');
-// const client = new pg.Client(process.env.DATABASE_URL);
-const client = new pg.Client({ connectionString: process.env.DATABASE_URL,   ssl: { rejectUnauthorized: false } });
+const override = require('method-override');
+const client = new pg.Client(process.env.DATABASE_URL);
+// const client = new pg.Client({ connectionString: process.env.DATABASE_URL,   ssl: { rejectUnauthorized: false } });
 const PORT = process.env.PORT;
 
 app.use(cors());
 app.set('view engine', 'ejs')
 app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true }));
-
+app.use(override('_method'));
 // app.get('/',(req,res)=>{
 //     res.render('pages/index');
 // });
@@ -22,7 +23,8 @@ app.post('/new', addBookToDB);
 app.get('/', getAllBooks);
 app.post('/edit', edaitSelected);
 app.get('/books/:book_id', getSpecificBook);
-
+app.put('/update:book_id',updateBook)
+app.post('/update/:book.id?_method=PUT',updatrForm)
 
 
 app.get('/error', (req, res) => {
@@ -39,6 +41,24 @@ app.get('*', (req, res) => {
     res.render('pages/error');
 
 });
+function updatrForm(req,res) {
+    res.render('/pages/books/edit');
+}
+
+
+function updateBook(req,res) {
+    let id = req.params.book_id;
+    let updateValues = req.body;
+    let SQL = 'UPDATE books SET image = $1, title = $2, authors = $3, decr = $4, isbn = $5, bookshelf = $6 WHERE id=$7;';
+    let values=[updateValues.image,updateValues.title,updateValues.authors,updateValues.decr,updateValues.isbn,updateValues.bookshelf,id] 
+    client.query(SQL, values).then(()=>{
+        res.redirect('/books/id',{book: data.rows[0]}).catch(error => {
+            res.render('/pages/error');
+    
+    
+        });
+    })
+}
 
 function addBookToDB(req, res) {
     // console.log(req.body)
