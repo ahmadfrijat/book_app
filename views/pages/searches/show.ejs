@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
 
     <link rel="stylesheet" href="/styles/style.css">
 
 </head>
+
 <body>
     <header>
         BOOKS!
@@ -19,44 +23,51 @@
     <h1 class="headerText"> Search Result</h1>
 
 
-<main>
-   
-    <ul>
+    <main>
 
-        <% books.forEach(book => { %>
-            <li class="renderedList"> 
-                <img src="<%= book.image %>" alt="">
-                <h2><%= book.title%></h2>
-                <h3><%= book.authors%></h3>
-                <p><%= book.decr%></p>
-                <form action="/edit" method="post">
-                    <input type="hidden" name="image" value="<%= book.image%>">
-                    <input type="hidden" name="title" value="<%= book.title%>">
-                    <input type="hidden" name="authors" value="<%= book.authors%>">
-                    <input type="hidden" name="decr" value="<%= book.decr%>">
-                    <input type="hidden" name="isbn" value="<%= book.isbn%>">
-                    <button id="DetailsButton" type="submit">Select this Book</button>
-                </form>
+        <ul>
 
-            </li>
+            <% books.forEach(book=> { %>
+                <li class="renderedList">
+                    <img src="<%= book.image %>" alt="">
+                    <h2>
+                        <%= book.title%>
+                    </h2>
+                    <h3>
+                        <%= book.authors%>
+                    </h3>
+                    <p>
+                        <%= book.decr%>
+                    </p>
+                    <form action="/edit" method="post">
+                        <input type="hidden" name="image" value="<%= book.image%>">
+                        <input type="hidden" name="title" value="<%= book.title%>">
+                        <input type="hidden" name="authors" value="<%= book.authors%>">
+                        <input type="hidden" name="decr" value="<%= book.decr%>">
+                        <input type="hidden" name="isbn" value="<%= book.isbn%>">
+                        <button id="DetailsButton" type="submit">Select this Book</button>
+                    </form>
 
-        <%})%>
-  
-    </ul> 
+                </li>
 
-</main>
+                <%})%>
 
-<footer class="footer">
-    <ul class="footerUl">
-        <li class="footerli"> <i class="fas fa-circle"></i></li>
-        <li> <i class="fas fa-circle"></i></li>
-        <li> <i class="fas fa-circle"></i></li>
-        <li> <i class="fas fa-circle"></i></li>
-    </ul>
-</footer>
+        </ul>
 
- 
+    </main>
+
+    <footer class="footer">
+        <ul class="footerUl">
+            <li class="footerli"> <i class="fas fa-circle"></i></li>
+            <li> <i class="fas fa-circle"></i></li>
+            <li> <i class="fas fa-circle"></i></li>
+            <li> <i class="fas fa-circle"></i></li>
+        </ul>
+    </footer>
+
+
 
 
 </body>
+
 </html>

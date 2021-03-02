@@ -23,8 +23,8 @@ app.post('/new', addBookToDB);
 app.get('/', getAllBooks);
 app.post('/edit', edaitSelected);
 app.get('/books/:book_id', getSpecificBook);
-app.put('/update:book_id',updateBook)
-app.post('/update/:book.id?_method=PUT',updatrForm)
+app.put('/update/:book_id', updateBook)
+app.delete('/delete/:book_id', deleteBook);
 
 
 app.get('/error', (req, res) => {
@@ -41,29 +41,39 @@ app.get('*', (req, res) => {
     res.render('pages/error');
 
 });
-function updatrForm(req,res) {
-    res.render('/pages/books/edit');
-}
 
-
-function updateBook(req,res) {
-    let id = req.params.book_id;
-    let updateValues = req.body;
-    let SQL = 'UPDATE books SET image = $1, title = $2, authors = $3, decr = $4, isbn = $5, bookshelf = $6 WHERE id=$7;';
-    let values=[updateValues.image,updateValues.title,updateValues.authors,updateValues.decr,updateValues.isbn,updateValues.bookshelf,id] 
-    client.query(SQL, values).then(()=>{
-        res.redirect('/books/id',{book: data.rows[0]}).catch(error => {
+function deleteBook(req, res) {
+    let SQL = 'DELETE FROM books WHERE id=$1';
+    let values = [req.params.book_id];
+    client.query(SQL, values)
+        .then(res.redirect('/'))
+        .catch(error => {
             res.render('/pages/error');
-    
-    
+
+
         });
-    })
 }
+
+function updateBook(req, res) {
+    let book = req.body
+    let SQL = 'UPDATE books SET image=$1, title=$2, authors=$3, decr=$4, isbn=$5, bookshelf=$6 WHERE id=$7;';
+    let values = [book.image, book.title, book.authors, book.decr, book.isbn, book.bookshelf, req.params.book_id];
+    client.query(SQL, values)
+        .then(res.redirect(`/books/${req.params.book_id}?`))
+        .catch(error => {
+            console.log(error);
+            res.render('/pages/error');
+
+
+        });
+}
+
+
 
 function addBookToDB(req, res) {
     // console.log(req.body)
     // let { image, title, authors, decr, isbn, bookshelf } = req.body
-   let SQL= `insert into books(image, title, authors, decr, isbn, bookshelf) VALUES ($1, $2, $3, $4, $5, $6)returning *;`;
+    let SQL = `insert into books(image, title, authors, decr, isbn, bookshelf) VALUES ($1, $2, $3, $4, $5, $6)returning *;`;
     // let SQL = `INSERT INTO books (image, title, authors, decr, isbn, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`
     let reqBody = req.body;
     let values = [reqBody.image, reqBody.title, reqBody.authors, reqBody.decr, reqBody.isbn, reqBody.bookshelf];
@@ -74,8 +84,8 @@ function addBookToDB(req, res) {
             res.redirect('/');
         }).catch(error => {
             res.render('/pages/error');
-    
-    
+
+
         });
 }
 
@@ -88,34 +98,34 @@ function getAllBooks(req, res) {
             res.render('pages/index', { booksList: data.rows });
         }).catch(error => {
             res.render('/pages/error');
-    
-    
+
+
         });
 }
 
 
 
-function edaitSelected(req,res){
+function edaitSelected(req, res) {
     // console.log(req.body)
-    res.render('pages/books/show', {book:req.body})
+    res.render('pages/books/show', { book: req.body })
 
 
 }
 
 
-function getSpecificBook(req,res){
+function getSpecificBook(req, res) {
     let SQL = `SELECT * FROM books WHERE id=$1`;
     let id = req.params.book_id;
-    let values =[id];
-    client.query(SQL,values)
-    .then(data=>{
-        // console.log(data.rows)
-        res.render('pages/books/detail',{book: data.rows[0]});
-    }).catch(error => {
-        res.render('/pages/error');
+    let values = [id];
+    client.query(SQL, values)
+        .then(data => {
+            // console.log(data.rows)
+            res.render('pages/books/detail', { book: data.rows[0] });
+        }).catch(error => {
+            res.render('/pages/error');
 
 
-    });
+        });
 }
 
 function handelSearches(req, res) {
@@ -154,8 +164,8 @@ function Book(data) {
 //     console.log('server is listinig to ' + PORT);
 // });
 client.connect()
-.then(()=>{
-    app.listen(PORT, () => console.log('server is listinig to ' + PORT));
-}).catch(error => {
-    res.render('/pages/error');
-});
+    .then(() => {
+        app.listen(PORT, () => console.log('server is listinig to ' + PORT));
+    }).catch(error => {
+        res.render('/pages/error');
+    });

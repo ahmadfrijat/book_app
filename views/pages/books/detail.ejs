@@ -1,85 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
 
     <link rel="stylesheet" href="/styles/style.css">
     <style>
-        #myDIV {
-          width: 100%;
-          height: 100%;
-          padding: 50px 0;
-          text-align: center;
-          background-color: gray;
-          margin-top: 20px;
-          display: none;
-        }
-        </style>
+
+    </style>
 </head>
+
 <body>
     <header>
-       <a href="/searches/new">Add a New Book</a>
-       <a href="/">Home</a>  
-          </header> 
-          <div id="myDIV" >
-            <form action="<%= `/update/${book.id}?_method=PUT`%>" method="POST">
-                <input type="text" name="image" value="<%= book.image%>">
-                <input type="text" name="title" value="<%= book.title %>">
-                <input type="text" name="contact" value="<%= book.authors %>">
-                <textarea name="description" cols="30" rows="10" > <%= book.decr %></textarea>
-                <input type="text" name="status" value="<%= book.isbn %>">
-                <button type="submit"> Update  </button>
-                </form>
-            </ul>
-        </div>
-<ul>
-    <li class="renderedList">
-       <img src="<%= book.image %>"> 
-       <h2><%=book.title %></h2>
-       <h3><%=book.authors%></h3>
-       <p><%=book.decr%></p>
-       <h4><%=book.isbn%></h4>
-       <p><%=book.bookshelf%></p>
-       <button onclick="myFunction()">Try it</button>
-    </li>
-    <form action="<%= `/update/${book.id}?_method=PUT`%>" method="POST">
-        <input type="hidden" name="image" value="<%= book.image%>">
-        <input type="hidden" name="title" value="<%= book.title %>">
-        <input type="hidden" name="contact" value="<%= book.authors %>">
-        <input type="hidden" name="description" value="<%= book.decr %>">
-        <!-- <textarea type="hidden" name="description" cols="30" rows="10" > <%= book.decr %></textarea> -->
-        <input type="hidden" name="status" value="<%= book.isbn %>">
-        <!-- <button type="submit"> Update  </button> -->
+        <a class="a" href="/searches/new">Add a New Book</a>
+        <a class="a" href="/">Home</a>
+    </header>
+    <div id="myDIV">
+        <form class="formUpdate" action="<%= `/update/${book.id}?_method=PUT`%>" method="POST">
+            <!-- <label for="">POPULATED Image URL</label><br> -->
+            <input id="inputText1" type="text" name="image" placeholder="POPULATED Image URL" value="<%= book.image%>">
+            <!-- <label for="">POPULATED TITLE</label><br> -->
+            <input id="inputText1" type="text" name="title" placeholder="POPULATED POPULATED TITLE"
+                value="<%= book.title %>">
+            <!-- <label for="">POPULATED AUTHOR</label><br> -->
+            <input id="inputText1" type="text" name="authors" placeholder="POPULATED AUTHOR"
+                value="<%= book.authors %>">
+            <!-- <label for="">POPULATED DESCRIPTION</label><br> -->
+            <textarea id="inputText1" name="decr" placeholder="POPULATED DESCRIPTION" cols="30"
+                rows="10"> <%= book.decr %></textarea>
+            <!-- <label for="">POPULATED ISBN</label><br> -->
+            <input id="inputText1" type="text" name="isbn" placeholder="POPULATED ISBN" value="<%= book.isbn %>">
+            <!-- <label for="">CONTACT</label><br> -->
+            <input id="inputText1" type="text" name="bookshelf" placeholder="CONTACT" value="<%= book.bookshelf %>"><br>
+            <button id="Button" type="submit"> UPDATE BOOK </button>
         </form>
-    </ul>
-       
+    </div>
 
-        
-        
-      
-
-<footer>
     <ul>
-        <li> <i class="fas fa-circle"></i></li>
-        <li> <i class="fas fa-circle"></i></li>
-        <li> <i class="fas fa-circle"></i></li>
-        <li> <i class="fas fa-circle"></i></li>
+        <li class="renderedList">
+            <img src="<%= book.image %>">
+            <h2>
+                <%=book.title %>
+            </h2>
+            <h3>
+                <%=book.authors%>
+            </h3>
+            <p>
+                <%=book.decr%>
+            </p>
+            <h4>
+                <%=book.isbn%>
+            </h4>
+            <p>
+                <%=book.bookshelf%>
+            </p>
+            <h4>
+                <%=book.isbn%>
+            </h4>
+            <p>
+                <%=book.bookshelf%>
+            </p>
+            <br>
+            <br>
+
+            <p>
+                Please Double Click On Update Button 😁
+            </p>
+            <button id="Button" onclick="myFunction()"> UPDATE BOOK</button>
+            <form id="formDelete" action="<%=`/delete/${book.id}?_method=DELETE`%>" method="POST">
+                <button id="Button" type="submit"> DELETE BOOK </button>
+            </form>
+
+
+        </li>
+
+
     </ul>
-</footer>
-<script>
-    function myFunction() {
-      var x = document.getElementById("myDIV");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-       
-      } else {
-        x.style.display = "none";
-      }
-    }
+
+
+
+
+
+
+    <footer>
+        <ul>
+            <li> <i class="fas fa-circle"></i></li>
+            <li> <i class="fas fa-circle"></i></li>
+            <li> <i class="fas fa-circle"></i></li>
+            <li> <i class="fas fa-circle"></i></li>
+        </ul>
+    </footer>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+
+            } else {
+                x.style.display = "none";
+            }
+        }
     </script>
 </body>
+
 </html>
