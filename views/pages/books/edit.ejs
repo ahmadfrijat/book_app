@@ -1,39 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+    crossorigin="anonymous" />
 
-    <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="/styles/style.css">
 </head>
+
 <body>
-    <header>
-       <a href="/searches/new">Add a New Book</a>
-       <a href="/">Home</a>  
-          </header> 
-<ul>
+  <header>
+    <a href="/searches/new">Add a New Book</a>
+    <a href="/">Home</a>
+  </header>
 
-    <form action="/update/<%= book.id %>?_method=PUT" method="post">
-        <input type="text" name="image" value="<%= book.image%>">
-        <input type="text" name="title" value="<%= book.title%>">
-        <input type="text" name="authors" value="<%= book.authors%>">
-        <input type="text" name="decr" value="<%= book.decr%>">
-        <input type="text" name="isbn" value="<%= book.isbn%>">
-        <button id="DetailsButton" type="submit">update</button>
-    </form>
-</ul>
-<h1>hello</h1>
-
-<footer>
+  <footer>
     <ul>
-        <li> <i class="fas fa-circle"></i></li>
-        <li> <i class="fas fa-circle"></i></li>
-        <li> <i class="fas fa-circle"></i></li>
-        <li> <i class="fas fa-circle"></i></li>
+      <li> <i class="fas fa-circle"></i></li>
+      <li> <i class="fas fa-circle"></i></li>
+      <li> <i class="fas fa-circle"></i></li>
+      <li> <i class="fas fa-circle"></i></li>
     </ul>
-</footer>
+  </footer>
 </body>
+
 </html>
