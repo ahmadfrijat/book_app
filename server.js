@@ -7,8 +7,8 @@ const superagent = require('superagent');
 require('dotenv').config();
 const pg = require('pg');
 const override = require('method-override');
-const client = new pg.Client(process.env.DATABASE_URL);
-// const client = new pg.Client({ connectionString: process.env.DATABASE_URL,   ssl: { rejectUnauthorized: false } });
+// const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client({ connectionString: process.env.DATABASE_URL,   ssl: { rejectUnauthorized: false } });
 const PORT = process.env.PORT;
 
 app.use(cors());
